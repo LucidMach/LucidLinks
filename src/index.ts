@@ -1,13 +1,25 @@
 import "./style.css";
 import * as THREE from "three";
+
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 
 // Vibe
 var audio = new Audio("audio/the_grid.mp3");
-audio.play();
-audio.loop = true;
+
+document.addEventListener("touchstart", () => {
+  if (audio.paused) {
+    audio.play();
+    audio.loop = true;
+  }
+});
+document.addEventListener("mousemove", () => {
+  if (audio.paused) {
+    audio.play();
+    audio.loop = true;
+  }
+});
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl") as HTMLCanvasElement;

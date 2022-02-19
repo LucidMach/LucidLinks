@@ -8,13 +8,16 @@ import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 // Vibe
 var audio = new Audio("audio/the_grid.mp3");
 
+// plays music when user touches the screen
 document.addEventListener("touchstart", () => {
   if (audio.paused) {
     audio.play();
     audio.loop = true;
   }
 });
-document.addEventListener("mousemove", () => {
+
+// plays music when user clicks on the screen
+document.addEventListener("click", () => {
   if (audio.paused) {
     audio.play();
     audio.loop = true;
@@ -74,6 +77,7 @@ fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
   // Donuts
   const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 32, 64);
 
+  // generate 100 donuts on the left and right side of the world
   for (let i = 0; i < 100; i++) {
     const donut = new THREE.Mesh(
       donutGeometry,
@@ -147,7 +151,17 @@ const tick = () => {
   // Update controls
   controls.update();
 
-  if (camera.position.z < 7) camera.position.z += (7 - camera.position.z) / 100;
+  if (camera.position.z < 7) {
+    camera.position.z += (7 - camera.position.z) / 100;
+  }
+  if (camera.position.y < 0)
+    camera.position.y -= (0.25 + camera.position.y) / 100;
+  if (camera.position.y > 0)
+    camera.position.y += (0.25 - camera.position.y) / 100;
+  if (camera.position.x < 0)
+    camera.position.x -= (0.25 + camera.position.x) / 100;
+  if (camera.position.x > 0)
+    camera.position.x += (0.25 - camera.position.x) / 100;
 
   // Render
   renderer.render(scene, camera);
@@ -156,4 +170,13 @@ const tick = () => {
   window.requestAnimationFrame(tick);
 };
 
-tick();
+// notifying user how to use this website
+const btn = document.querySelector(".btn") as HTMLButtonElement;
+const info = document.querySelector(".info") as HTMLDivElement;
+const links = document.querySelector(".links") as HTMLDivElement;
+
+btn.addEventListener("click", () => {
+  info.classList.add("hide");
+  links.classList.remove("hide");
+  tick();
+});

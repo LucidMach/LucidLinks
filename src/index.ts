@@ -5,30 +5,12 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 
-// Vibe
-var audio = new Audio("audio/the_grid.mp3");
-
-// plays music when user touches the screen
-document.addEventListener("touchstart", () => {
-  if (audio.paused) {
-    audio.play();
-    audio.loop = true;
-  }
-});
-
-// plays music when user clicks on the screen
-document.addEventListener("click", () => {
-  if (audio.paused) {
-    audio.play();
-    audio.loop = true;
-  }
-});
-
 // Canvas
 const canvas = document.querySelector("canvas.webgl") as HTMLCanvasElement;
 
 // Scene
 const scene = new THREE.Scene();
+scene.background = new THREE.Color("#171717");
 
 // Textures
 // const textureLoader = new THREE.TextureLoader();
@@ -151,9 +133,8 @@ const tick = () => {
   // Update controls
   controls.update();
 
-  if (camera.position.z < 7) {
-    camera.position.z += (7 - camera.position.z) / 100;
-  }
+  if (camera.position.z < 7) camera.position.z += (7 - camera.position.z) / 100;
+  if (camera.position.z > 7) camera.position.z -= (7 + camera.position.z) / 100;
   if (camera.position.y < 0)
     camera.position.y -= (0.25 + camera.position.y) / 100;
   if (camera.position.y > 0)
@@ -178,5 +159,23 @@ const links = document.querySelector(".links") as HTMLDivElement;
 btn.addEventListener("click", () => {
   info.classList.add("hide");
   links.classList.remove("hide");
+  // Vibe
+  var audio = new Audio("audio/the_grid.mp3");
+
+  // plays music when user touches the screen
+  document.addEventListener("touchstart", () => {
+    if (audio.paused) {
+      audio.play();
+      audio.loop = true;
+    }
+  });
+
+  // plays music when user clicks on the screen
+  document.addEventListener("click", () => {
+    if (audio.paused) {
+      audio.play();
+      audio.loop = true;
+    }
+  });
   tick();
 });

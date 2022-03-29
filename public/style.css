@@ -32,14 +32,14 @@
   padding: 0.25rem;
   flex-grow: 1;
   justify-content: center;
-  border-left: 1px solid var(--accent);
+  border-left: 1px solid var(--opp);
+  filter: drop-shadow(0.05rem 0.05rem 0.125rem var(--sec));
 }
 .link:first-child {
   border-left: none;
 }
 svg {
-  fill: var(--accent);
-  filter: drop-shadow(0.05rem 0.05rem 0.25rem var(--opp));
+  fill: var(--opp);
   cursor: pointer;
 }
 body {

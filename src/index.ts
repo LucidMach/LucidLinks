@@ -12,15 +12,16 @@ const canvas = document.querySelector("canvas.webgl") as HTMLCanvasElement;
 const scene = new THREE.Scene();
 scene.background = new THREE.Color("#171717");
 
-// Textures
-// const textureLoader = new THREE.TextureLoader();
-// const matcapTexture = textureLoader.load("textures/matcaps/7.png");
-
-// Fonts
+// Loaders
+/* const textureLoader = new THREE.TextureLoader(); */
 const fontLoader = new FontLoader();
 
+// Textures
+/* const matcapTexture = textureLoader.load("textures/matcaps/7.png"); */
+
+// Fonts
 fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
-  // Text
+  // Text Mesh Geometery
   const textGeometry = new TextGeometry("LucidMach", {
     font: font,
     size: 0.5,
@@ -55,7 +56,6 @@ fontLoader.load("/fonts/helvetiker_regular.typeface.json", (font) => {
   );
   scene.add(mesh);
 
-  // Donuts
   // Donuts
   const donutGeometry = new THREE.TorusGeometry(0.3, 0.2, 32, 64);
 
